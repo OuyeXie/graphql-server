@@ -45,3 +45,35 @@ request
     .end(function (err, res) {
         debug(err || res.body)
     })
+
+request
+    .get('http://localhost:3000/data')
+    .query({
+        query: `query user_rank{
+        user_ranking{
+            name
+        }
+    }`
+    })
+    .end(function (err, res) {
+        debug(err || res.body)
+        debug(res.body.data.user_ranking)
+    })
+
+request
+    .get('http://localhost:3000/data')
+    .query({
+        query: `query user_rank{
+        user_ranking(limit: 10) {
+            _id
+            id
+            name
+            rank
+            score
+        }
+    }`
+    })
+    .end(function (err, res) {
+        debug(err || res.body)
+        debug(res.body.data.user_ranking)
+    })

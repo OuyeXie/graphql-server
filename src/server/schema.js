@@ -2,10 +2,14 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLSchema,
-    GraphQLString
+    GraphQLString,
+    GraphQLInt,
+    GraphQLFloat,
+    GraphQLList
 } from 'graphql/type'
 
 import Debug from 'debug'
+import moment from 'moment'
 import mongo from './mongo'
 import config from '../config/init'
 import Random from 'random-js'
@@ -60,6 +64,33 @@ var stockType = new GraphQLObjectType({
     })
 })
 
+var userRankType = new GraphQLObjectType({
+    name: 'user_rank',
+    description: 'user rank',
+    fields: () => ({
+        _id: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'id of record.'
+        },
+        id: {
+            type: GraphQLString,
+            description: 'id of user.'
+        },
+        name: {
+            type: GraphQLString,
+            description: 'name of user.'
+        },
+        rank: {
+            type: GraphQLInt,
+            description: 'rank of user.'
+        },
+        score: {
+            type: GraphQLFloat,
+            description: 'score of user.'
+        }
+    })
+})
+
 var schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'query',
@@ -92,15 +123,40 @@ var schema = new GraphQLSchema({
                     var randomValue = (new Random()).integer(1, max)
                     var query = {rank: randomValue}
                     var sortQuery = [['ts', -1]]
-                    return mongo.connect().then(function () {
-                        return mongo.findOneWithSort(mongo.rankStockCollection, query, sortQuery)
-                    }).then(function (_rank) {
-                        return _rank.symbol
-                    }).then(function(_symbol){
-                        return {
-                            symbol: _symbol,
-                            name: 'NOTAVAILABLE'
-                        }
+                    return mongo.findOneWithSort(mongo.rankStockCollection, query, sortQuery)
+                        .then(function (_rank) {
+                            return _rank.symbol
+                        }).then(function (_symbol) {
+                            return {
+                                symbol: _symbol,
+                                name: 'NOTAVAILABLE'
+                            }
+                        }).catch(function (err) {
+                            debug(err)
+                            return null
+                        })
+                }
+            },
+            user_ranking: {
+                type: new GraphQLList(userRankType),
+                args: {
+                    limit: {
+                        name: 'limit',
+                        type: GraphQLInt
+                    }
+                },
+                //TODO: can be optimized by extract
+                resolve: (root, {limit}) => {
+                    limit = limit || 200
+                    var now = moment().format('YYYY-MM-DD')
+                    var query = {date: now}
+                    // VERY IMPORTANT: SORTQUERY IS NOT WORKING IN THE FORMAT WHICH DOCUMENTS GIVE
+                    var sortQuery = {'rank': 1}
+
+                    return mongo.findLimitWithSort(mongo.rankExternalUserCollection, query, sortQuery, limit)
+                    then(function (_rank) {
+                        debug(_rank)
+                        return _rank
                     }).catch(function (err) {
                         debug(err)
                         return null
@@ -109,7 +165,6 @@ var schema = new GraphQLSchema({
             }
         }
     })
-
 })
 
 export default schema

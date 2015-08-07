@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "ouyexie",
+    "password": "yebao1919",
+    "host": "localhost",
+    "database": "db_migrate_test",
+    "schema": "my_schema"
+  },
+  "sql-file" : true
+}

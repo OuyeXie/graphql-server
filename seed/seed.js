@@ -36,15 +36,19 @@ var users = [
 
 // drop users collection
 
-mongoose.connection.collections['users'].drop(function (err) {
+mongoose.connection.collections.users.drop(function (err) {
+    if (err){
+        console.log(err)
+    }
 
-    User.create(users, function (err, res) {
+    User.create(users, function (createErr, createRes) {
 
-        if (err) {
-            console.log(err)
+        if (createErr) {
+            console.log(createErr)
         }
         else {
             console.log('Seed data created.')
+            console.log(createRes)
         }
 
         process.exit()
@@ -52,5 +56,3 @@ mongoose.connection.collections['users'].drop(function (err) {
     })
 
 })
-
-

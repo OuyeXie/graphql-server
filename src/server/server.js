@@ -3,7 +3,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import Debug from 'debug'
-import mongoose from 'mongoose'
 import {graphql} from 'graphql'
 import schema from './schema'
 import mongo from './mongo'
@@ -36,7 +35,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
-router.use('/data', function (req, res, next) {
+router.use('/data', function (req, res) {
     var queryData = _.isEmpty(req.body) ? req.query : req.body
     var query = queryData.query
     var params = queryData.params
@@ -65,3 +64,25 @@ app.listen(port, () => {
 })
 
 module.exports = app
+
+/*
+ * before exit
+ */
+
+//so the program will not close instantly
+//process.stdin.resume();
+
+function exitHandler(options, err) {
+    if (options.cleanup) debug('clean up before exit');
+    if (err) debug(err.stack);
+    if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on('exit', exitHandler.bind(null, {cleanup: true}));
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit: true}));
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {exit: true}));

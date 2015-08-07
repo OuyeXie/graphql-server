@@ -2,11 +2,9 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLSchema,
-    GraphQLString,
-    GraphQLList
+    GraphQLString
 } from 'graphql/type'
 
-import co from 'co'
 import Debug from 'debug'
 import mongo from './mongo'
 import config from '../config/init'
@@ -19,7 +17,7 @@ var debug = new Debug('server:schema')
  * @param  {Object} fieldASTs
  * @return {Project}
  */
-function getProjection(fieldASTs) {
+export function getProjection(fieldASTs) {
     if (fieldASTs.selectionSet) {
         return fieldASTs.selectionSet.selections.reduce((projections, selection) => {
             projections[selection.name.value] = 1
@@ -80,7 +78,7 @@ var schema = new GraphQLSchema({
                         type: new GraphQLNonNull(GraphQLString)
                     }
                 },
-                resolve: (root, {id}, source, fieldASTs) => {
+                resolve: (root, {id}) => {
                     return {
                         id: id,
                         name: 'asdf'
@@ -91,7 +89,7 @@ var schema = new GraphQLSchema({
                 type: stockType,
                 resolve: () => {
                     var max = config.randomMaxForRankStock || 50
-                    var randomValue = Random().integer(1, max)
+                    var randomValue = (new Random()).integer(1, max)
                     var query = {rank: randomValue}
                     var sortQuery = [['ts', -1]]
                     return mongo.connect().then(function () {
@@ -114,5 +112,4 @@ var schema = new GraphQLSchema({
 
 })
 
-export var getProjection
 export default schema

@@ -1,0 +1,1 @@
+CREATE TABLE wx_order(id bigserial primary key, ts timestamp, user_id varchar(24), type varchar(20), status varchar(20));

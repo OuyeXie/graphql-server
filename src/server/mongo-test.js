@@ -4,7 +4,7 @@ var mongo = require('./mongo')
 //debug
 if (require.main === module) {
     setTimeout(function () {
-        console.info("construct successfully")
+        console.info('construct successfully')
         mongo.connect()
             .then(function () {
                 return mongo.findOne(mongo.rankRebalancingCollection, {rank: 0})
@@ -17,7 +17,7 @@ if (require.main === module) {
                 mongo.close()
             })
             .then(function () {
-                console.info("finish")
+                console.info('finish')
             })
             .catch(function (err) {
                 console.error(err)

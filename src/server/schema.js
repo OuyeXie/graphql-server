@@ -12,7 +12,7 @@ import Debug from 'debug'
 import moment from 'moment'
 import mongo from './mongo'
 import config from '../config/init'
-import Random from 'random-js'
+import _ from 'lodash'
 
 var debug = new Debug('server:schema')
 
@@ -120,7 +120,7 @@ var schema = new GraphQLSchema({
                 type: stockType,
                 resolve: () => {
                     var max = config.randomMaxForRankStock || 50
-                    var randomValue = (new Random()).integer(1, max)
+                    var randomValue = _.random(1, max)
                     var query = {rank: randomValue}
                     var sortQuery = [['ts', -1]]
                     return mongo.findOneWithSort(mongo.rankStockCollection, query, sortQuery)

@@ -21,12 +21,11 @@
     "debug": "^2.2.0",
     "express": "^4.12.4",
     "graphql": "^0.2.4",
-    "lodash": "^3.6.0",
+    "lodash": "^3.10.1",
     "moment": "^2.9.0",
     "mongodb": "^2.0.39",
     "mongoose": "^4.0.6",
     "morgan": "^1.5.3",
-    "random-js": "^1.0.4",
     "react": "^0.13.1",
     "superagent": "^1.2.0"
   },

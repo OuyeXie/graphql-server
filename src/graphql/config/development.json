@@ -1,0 +1,19 @@
+{
+  "webPort": 3000,
+  "applicationName": "gs-test",
+  "applicationId": "8i1xy4xtvoql85wo63k6he4xymm0t0al4z8k8mkjjxcbj1is",
+  "applicationKey": "ssz2x2kih2mfwrp3x0qvtibud2xfr9gc1ttwru9uhd28awh4",
+  "applicationMasterKey": "bga794mb9bmox5khisn42sc3nuzqlte3j57ur9h4mb3ncx38",
+  "serviceAppid": "wx4af053cb3fe18b44",
+  "serviceAppsecret": "587f246f3a6ee11a04b51e339767d8f0",
+  "serviceCallbackToken": "xqpmasdk8ye7wic52hztfvgu9jo1blrn",
+  "serviceEncodingAESKey": "",
+  "neeqsubAppid": "wxa24db3800b9f15f6",
+  "neeqsubAppsecret": "1fd23fa5679dd266ba15486d8b27bf8a",
+  "neeqsubCallbackToken": "xqpmasdk8ye7wic52hztfvgu9jo1blrn",
+  "neeqsubEncodingAESKey": "bAD95pU7QByNabq42B6AfqKJp2kQm1VS7LAsGcco6ac",
+  "websiteAppid": "wxccffe477087dd206",
+  "websiteAppsecret": "1844df65cecee0870996f968c812bbd1",
+  "randomMaxForRankRebalancing": 1000,
+  "randomMaxForRankStock": 50
+}

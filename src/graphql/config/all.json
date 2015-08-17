@@ -1,0 +1,32 @@
+{
+  "locales": [
+    "en",
+    "fr"
+  ],
+  "dbStock": {
+    "host": "rds8wzr99nop9ummzwi2h.mysql.rds.aliyuncs.com",
+    "user": "sgp",
+    "password": "shengupiao",
+    "database": "stock",
+    "charset": "utf8"
+  },
+  "mongodb": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "user": "xxx",
+    "password": "xxx",
+    "database": "infinity",
+    "rankRebalancingCollection": "rankRebalancing",
+    "rankExternalUserCollection": "rankExternalUser",
+    "rankStockCollection": "rankStock",
+    "rebalancingCollection": "rebalancing",
+    "externaluserCollection": "externaluser",
+    "portfolioCollection": "portfolio"
+  },
+  "wxpay": {
+    "appId": "wxd34fed2afc9f960e",
+    "mchId": "1246294101",
+    "partnerKey": "9051c3fb9b18c8e918771675f460c147",
+    "notifyUrl": "http://shengupiao.com/wxpay_callback"
+  }
+}

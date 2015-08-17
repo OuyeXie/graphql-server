@@ -1,0 +1,19 @@
+{
+  "webPort": 3010,
+  "applicationName": "神股票",
+  "applicationId": "ax13wnji1vxwg0z5z7lqb11rv6ot1bsn4j9xqvl4tqdvkemp",
+  "applicationKey": "mno1bfsrmivi3vp4qb95g06ja830wsa571c007s1to90lbgl",
+  "applicationMasterKey": "yrzsxi5vk9sw021lqz64uulp6xjln0haf1a1unpnbpql20oe",
+  "serviceAppid": "wxd34fed2afc9f960e",
+  "serviceAppsecret": "a1915e0638dc74f854536e8790ec156d",
+  "serviceCallbackToken": "xqpmasdk8ye7wic52hztfvgu9jo1blrn",
+  "serviceEncodingAESKey": "bAD95pU7QByNabq42B6AfqKJp2kQm1VS7LAsGcco6ac",
+  "neeqsubAppid": "wxa24db3800b9f15f6",
+  "neeqsubAppsecret": "1fd23fa5679dd266ba15486d8b27bf8a",
+  "neeqsubCallbackToken": "xqpmasdk8ye7wic52hztfvgu9jo1blrn",
+  "neeqsubEncodingAESKey": "bAD95pU7QByNabq42B6AfqKJp2kQm1VS7LAsGcco6ac",
+  "websiteAppid": "wxccffe477087dd206",
+  "websiteAppsecret": "1844df65cecee0870996f968c812bbd1",
+  "randomMaxForRankRebalancing": 1000,
+  "randomMaxForRankStock": 50
+}

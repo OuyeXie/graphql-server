@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import User from '../src/server/user'
+import User from '../src/graphql/server/user'
 
 // connect to mongo
 

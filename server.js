@@ -9,6 +9,7 @@ var webpackConfigGraphQL = require('./webpack.config.graphql')
 var webpackConfigWebserver = require('./webpack.config.webserver')
 var forever = require('forever-monitor')
 var path = require('path')
+var express = require('express')
 
 function createMoninor(webpackConfig, config) {
     var monitor
@@ -32,15 +33,20 @@ function createMoninor(webpackConfig, config) {
 }
 
 function createWebpackDevServer(webpackConfig, config) {
-
-    var server = new WebpackDevServer(webpack(...webpackConfig), {
+    var server = new WebpackDevServer(webpack(webpackConfig), {
         contentBase: '/public/',
-        publicPath: '/webserver/',
+        publicPath: '/src/webserver/',
         stats: {colors: true},
         proxy: {'/graphql': `http://localhost:${config.proxyPort}`}
     })
 
-    server.listen(config.port)
+    // Serve static resources
+    server.use('/', express.static('public'));
+    server.use('/node_modules', express.static('node_modules'));
+
+    server.listen(config.port, () => {
+        console.log(`App is now running on http://localhost:${config.port}`);
+    })
 }
 
 var webserverPort = process.env.PORT

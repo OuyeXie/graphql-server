@@ -8,15 +8,15 @@ export default {
     loaders: [
       {
         test: /\.js$/,
-        include: [config.src],
+        exclude: /node_modules/,
         loaders: ['babel']
       },
       {
         test: /\.json$/,
-        include: [
-          config.src,
-          path.join(config.root, 'node_modules', 'intl', 'locale-data', 'json')
-        ],
+        //include: [
+        //  config.src,
+        //  path.join(config.root, 'database.json')
+        //],
         loaders: ['json']
       },
       {
@@ -33,7 +33,7 @@ export default {
   plugins: [
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
-        process.env.NODE_ENV || 'development'
+          process.env.NODE_ENV || 'development'
       )
     }),
 

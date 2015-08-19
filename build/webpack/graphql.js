@@ -1,30 +1,24 @@
+import {DefinePlugin} from 'webpack'
+
 import path from 'path'
 
+import config from '../config'
+import base from './base'
+
 export default {
+    ...base,
+    ...config.nodeMixin,
+
     entry: path.resolve(__dirname, '../../src/graphql/server', 'index.js'),
-    module: {
-        //loaders: [
-        //  {
-        //    test: /\.js$/,
-        //    loader: 'babel',
-        //    query: {stage: 0, plugins: ['../babelRelayPlugin']}
-        //  }
-        //]
-        loaders: [
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.js$|.jsx$/,
-                exclude: /node_modules/,
-                loader: 'babel'
-            }
-        ]
-    },
+
     output: {filename: 'index.js', path: 'dist'},
-    resolve: {
-        extensions: ['', '.js', '.json', '.jsx'],
-        modulesDirectories: ['node_modules', 'src/graphql/server']
-    }
+
+    plugins: [
+        new DefinePlugin({
+            '__FRONTEND__': false,
+            '__BACKEND__': true
+        }),
+
+        ...base.plugins
+    ]
 }

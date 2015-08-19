@@ -25,11 +25,19 @@ function createMoninor(webpackConfig, config) {
             } else {
                 monitor.restart()
             }
+            if (err) {
+                console.log(err.toString({
+                    colors: true
+                }))
+            }
 
-            console.log(stats.toString({
-                colors: true
-            }))
-        })
+            if (stats) {
+                console.log(stats.toString({
+                    colors: true
+                }))
+            }
+        }
+    )
 }
 
 function createWebpackDevServer(webpackConfig, config) {
@@ -54,12 +62,12 @@ var webserverPort = process.env.PORT
     : 3000
 var graphqlPort = webserverPort + 1
 
-//createMoninor(webpackConfigGraphQL, {
-//    script: path.join(__dirname, 'dist', 'graphql.js'),
-//    env: {
-//        PORT: graphqlPort
-//    }
-//})
+createMoninor(webpackConfigGraphQL, {
+    script: path.join(__dirname, 'dist', 'index.js'),
+    env: {
+        PORT: graphqlPort
+    }
+})
 
 createWebpackDevServer(webpackConfigWebserver, {
     port: webserverPort,
